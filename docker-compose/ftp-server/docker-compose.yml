@@ -1,0 +1,16 @@
+# ignored options for 'ftp-server'
+# --detach
+version: "3.3"
+services:
+  ftp-server:
+    environment:
+      - FTP_PASS=pass
+      - FTP_USER=user
+      - PUBLIC_IP=192.168.2.128
+    container_name: ftp-server
+    ports:
+      - 21:21/tcp
+    volumes:
+      - /data:/home/user
+    image: garethflowers/ftp-server
+networks: {}
