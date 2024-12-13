@@ -1,0 +1,5 @@
+1. Fabric installer ausführen (.exe für windows und .jar für andere)
+2. Minecraft-Version: 1.21.4
+3. Installieren drücken
+4. install.cmd ausführen (Windows only)
+5. Minecraft Launcher starten und fabric installation auswählen (Steht links neben Spielen, wenn Minecraft: Java Edition ausgewählt ist)
