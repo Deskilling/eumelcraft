@@ -1,0 +1,12 @@
+services:
+  alpine-ftp-server:
+    container_name: ftp-server
+    image: delfer/alpine-ftp-server
+    ports:
+      - 21:21
+      - 21000-21010:21000-21010
+    environment:
+      - USERS=leif|1234
+      - ADDRESS=192.168.2.128
+    volumes:
+      - /home/leif:/ftp/leif

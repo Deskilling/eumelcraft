@@ -1,6 +1,5 @@
 # Eumelcraft
 Includes:
-- All Eumelcraft mods for simple Installation
 - Data/Configs for the Minecraft Server (current version 1.21.4)
 - Configuration for my Raspberry Pi 5
 
