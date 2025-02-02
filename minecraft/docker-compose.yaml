@@ -14,21 +14,24 @@ services:
     # Voicechat
       - "25563:25563/udp"
 
+    env_file:
+      - minecraft-variables.env
+
     environment:
       EULA: "TRUE"
-      TZ: "Europe/Berlin"
-      VERSION: "LATEST"
+      TZ: ${TIME_ZONE}
+      VERSION: ${VERSION}
       PAPER_CHANNEL: "experimental"
-      TYPE: "PAPER"
+      TYPE: ${SERVER_TYPE}
       USE_AIKAR_FLAGS: "true"
       INIT_MEMORY: 350M
-      MEMORY: 7250M
-      MAX_MEMORY: 7250M
+      MEMORY: ${MEMORY}
+      MAX_MEMORY: ${MEMORY}
 
       # Rcon
-      ENABLE_RCON: "true"
-      RCON_PASSWORD: "DEFAULT"
-      RCON_PORT: 25575
+      ENABLE_RCON: ${ENABLE_RCON}
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      RCON_PORT: ${RCON_PORT}
 
       # Plugins (Modrinth gerade Down)
       PLUGINS: |
@@ -36,33 +39,33 @@ services:
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
 
       # Modrinth
-      MODRINTH_ALLOWED_VERSION_TYPE: "alpha"
-      MODRINTH_PROJECTS: "simple-voice-chat, teaks-tweaks, luckperms"
+      MODRINTH_ALLOWED_VERSION_TYPE: ${MODRINTH_ALLOWED_VERSION_TYPE}
+      MODRINTH_PROJECTS: ${MODRINTH_PROJECTS}
 
       # Server Properties
-      SERVER_NAME: "Eumelcraft"
-      GAMEMODE: "survival"
-      DIFFICULTY: "hard"
-      OPS: "Leeeiif"
-      WHITELIST: "Leeeiif"
-      MAX_PLAYERS: "69"
-      MOTD: "Der ECHTE EUMELCRAFT SERVER"
-      VIEW_DISTANCE: "12"
-      SIMULATION_DISTANCE: "8"
-      SYNC_CHUNK_WRITES: "false"
-      SPAWN_PROTECTION: "0"
-      #NETWORK_COMPRESSION_THRESHOLD: 128
-      ENFORCE_SECURE_PROFILE: "false"
+      SERVER_NAME: ${SERVER_NAME}
+      GAMEMODE: ${GAMEMODE}
+      DIFFICULTY: ${DIFFICULTY}
+      OPS: ${OPS}
+      WHITELIST: ${WHITELIST}
+      MAX_PLAYERS: ${MAX_PLAYERS}
+      MOTD: ${MOTD}
+      VIEW_DISTANCE: ${VIEW_DISTANCE}
+      SIMULATION_DISTANCE: ${SIMULATION_DISTANCE}
+      SYNC_CHUNK_WRITES: ${SYNC_CHUNK_WRITES}
+      SPAWN_PROTECTION: ${SPAWN_PROTECTION}
+      ENFORCE_SECURE_PROFILE: ${ENFORCE_SECURE_PROFILE}
+
       # Auto-Pause Configuration
-      ENABLE_AUTOPAUSE: "true"
-      AUTOPAUSE_TIMEOUT_EST: "15"
-      AUTOPAUSE_TIMEOUT_INIT: "15"
-      #DEBUG_AUTOPAUSE: "false"
-      MAX_TICK_TIME: "-1"
-      JVM_DD_OPTS: "disable.watchdog:true"
+      ENABLE_AUTOPAUSE: ${ENABLE_AUTOPAUSE}
+      AUTOPAUSE_TIMEOUT_EST: ${AUTOPAUSE_TIMEOUT_EST}
+      AUTOPAUSE_TIMEOUT_INIT: ${AUTOPAUSE_TIMEOUT_INIT}
+
+      MAX_TICK_TIME: ${MAX_TICK_TIME}
+      JVM_DD_OPTS: ${JVM_DD_OPTS}
 
     volumes:
-      - /home/leif/minecraft/data:/data
+      - ${MINECRAFT_DATA}:/data
 
     tty: true
     stdin_open: true
@@ -77,18 +80,18 @@ services:
 
     environment:
       RCON_HOST: mc
-      RCON_PASSWORD: "DEFAULT"
-      BACKUP_NAME: "eumelcraft_backup"
-      BACKUP_INTERVAL: "24h"
-      BACKUP_METHOD: "tar"
-      BACKUP_RETENTION: "3"
-      PRUNE_BACKUPS_DAYS: "7"
-      INITIAL_DELAY: "5m"
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      BACKUP_NAME: ${BACKUP_NAME}
+      BACKUP_INTERVAL: ${BACKUP_INTERVAL}
+      BACKUP_METHOD: ${BACKUP_METHOD}
+      BACKUP_RETENTION: ${BACKUP_RETENTION}
+      PRUNE_BACKUPS_DAYS: ${PRUNE_BACKUPS_DAYS}
+      INITIAL_DELAY: ${INITIAL_DELAY}
       BACKUP_ARCHIVE_PERMISSIONS: "0644"
-      TZ: "Europe/Berlin"
+      TZ: ${TIME_ZONE}
       BACKUP_UID: "1000"
       BACKUP_GID: "1000"
 
     volumes:
-      - /home/leif/minecraft/data:/data:ro
-      - /home/leif/minecraft/backups:/backups
+      - ${MINECRAFT_DATA}:/data:ro
+      - ${BACKUP_DATA}:/backups

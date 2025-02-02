@@ -3,9 +3,25 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
-    environment:
-      DOMAIN: "https://vw.domain.tld"
-    volumes:
-      - /home/leif/vaultwarden:/data/
     ports:
       - 80:80
+
+    env_file:
+      - vaultwarden-variables.env
+
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ${VAULTWARDEN_DATA}:/data/
+
+  tunnel:
+    container_name: cloudflare-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+
+networks:
+  vaultwarden:
+    external: true

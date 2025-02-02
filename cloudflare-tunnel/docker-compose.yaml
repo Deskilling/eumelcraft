@@ -1,1 +1,0 @@
-name: cloudflare-tunnelservices:    cloudflared:        image: cloudflare/cloudflared:latest        command: tunnel --no-autoupdate run --token TUNNEL_TOKEN

@@ -9,11 +9,13 @@ services:
     read_only: true
     cap_drop: [all]
     security_opt: [no-new-privileges:true]
+    env_file:
+      - ddns-variables.env
     environment:
-      - CLOUDFLARE_API_TOKEN=API_KEY
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
         # Your Cloudflare API token
-      - DOMAINS=DOMAIN
+      - DOMAINS=${DOMAIN}
         # Your domains (separated by commas)
-      - PROXIED=false
+      - PROXIED=${PROXIED}
         # Tell Cloudflare to cache webpages and hide your IP (optional)
       - IP6_PROVIDER=none
