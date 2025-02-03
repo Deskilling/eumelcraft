@@ -12,7 +12,7 @@ services:
       - ${VAULTWARDEN_DATA}:/data/
 
   tunnel:
-    container_name: cloudflare-tunnel
+    container_name: cloudflare-tunnel-vaultwarden
     image: cloudflare/cloudflared
     restart: unless-stopped
     command: tunnel run
