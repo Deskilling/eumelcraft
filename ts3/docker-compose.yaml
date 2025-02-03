@@ -1,0 +1,14 @@
+name: ts3
+services:
+  teamspeak3-server:
+        container_name: TeamSpeak3_Server
+        environment:
+            - TS_UPDATE=${UPDATES}
+            - TIME_ZONE=${TIME_ZONE}
+        ports:
+            - 9987:9987/udp
+            - 10011:10011/tcp
+            - 30033:30033/tcp
+        volumes:
+            - "${TS3_DATA}:/teamspeak/save/"
+        image: ertagh/teamspeak3-server:latest-box

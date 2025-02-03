@@ -9,8 +9,6 @@ services:
     read_only: true
     cap_drop: [all]
     security_opt: [no-new-privileges:true]
-    env_file:
-      - ddns-variables.env
     environment:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
         # Your Cloudflare API token

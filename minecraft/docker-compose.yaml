@@ -14,9 +14,6 @@ services:
     # Voicechat
       - "25563:25563/udp"
 
-    env_file:
-      - minecraft-variables.env
-
     environment:
       EULA: "TRUE"
       TZ: ${TIME_ZONE}
