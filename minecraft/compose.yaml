@@ -2,43 +2,34 @@ services:
   minecraft:
     image: itzg/minecraft-server
     container_name: mc
+    network_mode: "host"
     restart: unless-stopped
-
     ports:
-    # Normal
-      - "25565:25565/tcp"
-    # Rcon
-      - "25575:25575/tcp"
-    # Geyser
-      - "19132:19132/udp"
-    # Voicechat
-      - "25563:25563/udp"
-
+      # Normal
+      - 25565:25565/tcp
+      # Rcon
+      - 25575:25575/tcp
+      # Geyser
+      - 19132:19132/udp
+      # Voicechat
+      - 25563:25563/udp
     environment:
       EULA: "TRUE"
       TZ: ${TIME_ZONE}
       VERSION: ${VERSION}
-      PAPER_CHANNEL: "experimental"
+      PAPER_CHANNEL: experimental
       TYPE: ${SERVER_TYPE}
       USE_AIKAR_FLAGS: "true"
       INIT_MEMORY: 350M
       MEMORY: ${MEMORY}
       MAX_MEMORY: ${MEMORY}
-
       # Rcon
       ENABLE_RCON: ${ENABLE_RCON}
       RCON_PASSWORD: ${RCON_PASSWORD}
       RCON_PORT: ${RCON_PORT}
-
-      # Plugins (Modrinth gerade Down)
-      PLUGINS: |
-        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
-        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
-
       # Modrinth
       MODRINTH_ALLOWED_VERSION_TYPE: ${MODRINTH_ALLOWED_VERSION_TYPE}
       MODRINTH_PROJECTS: ${MODRINTH_PROJECTS}
-
       # Server Properties
       SERVER_NAME: ${SERVER_NAME}
       GAMEMODE: ${GAMEMODE}
@@ -52,29 +43,22 @@ services:
       SYNC_CHUNK_WRITES: ${SYNC_CHUNK_WRITES}
       SPAWN_PROTECTION: ${SPAWN_PROTECTION}
       ENFORCE_SECURE_PROFILE: ${ENFORCE_SECURE_PROFILE}
-
       # Auto-Pause Configuration
       ENABLE_AUTOPAUSE: ${ENABLE_AUTOPAUSE}
       AUTOPAUSE_TIMEOUT_EST: ${AUTOPAUSE_TIMEOUT_EST}
       AUTOPAUSE_TIMEOUT_INIT: ${AUTOPAUSE_TIMEOUT_INIT}
-
       MAX_TICK_TIME: ${MAX_TICK_TIME}
       JVM_DD_OPTS: ${JVM_DD_OPTS}
-
     volumes:
       - ${MINECRAFT_DATA}:/data
-
     tty: true
     stdin_open: true
-
-  mc_backup:
+  mc-backup:
     image: itzg/mc-backup
     container_name: mc-backup
     restart: unless-stopped
-
     depends_on:
       - minecraft
-
     environment:
       RCON_HOST: mc
       RCON_PASSWORD: ${RCON_PASSWORD}
@@ -88,7 +72,7 @@ services:
       TZ: ${TIME_ZONE}
       BACKUP_UID: "1000"
       BACKUP_GID: "1000"
-
     volumes:
       - ${MINECRAFT_DATA}:/data:ro
       - ${BACKUP_DATA}:/backups
+networks: {}

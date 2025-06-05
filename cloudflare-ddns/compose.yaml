@@ -1,0 +1,19 @@
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:latest
+    network_mode: host
+    # This bypasses network isolation and makes IPv6 easier (optional; see below)
+    container_name: cloudflare-ddns
+    restart: always
+    user: 1000:1000
+    read_only: true
+    cap_drop:
+      - all
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN} # Your Cloudflare API token
+      - DOMAINS=${DOMAIN} # Your domains (separated by commas)
+      - PROXIED=${PROXIED} # Tell Cloudflare to cache webpages and hide your IP (optional)
+      - IP6_PROVIDER=none
+networks: {}

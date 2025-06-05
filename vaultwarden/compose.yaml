@@ -5,20 +5,17 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
-
     environment:
       DOMAIN: ${DOMAIN}
     volumes:
       - ${VAULTWARDEN_DATA}:/data/
-
   tunnel:
-    container_name: cloudflare-tunnel-vaultwarden
+    container_name: vaultwarden-tunnel
     image: cloudflare/cloudflared
     restart: unless-stopped
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-
 networks:
   vaultwarden:
     external: true
