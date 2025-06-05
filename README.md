@@ -1,7 +1,7 @@
 # Eumelcraft
-Includes:
-- Data/Configs for the Minecraft Server (current version 1.21.4)
-- Configuration for my Raspberry Pi 5
+This includes the configuration for:
+- my minecraft server
+- cloudflare ddns
+- vaultwarden
 
-# Note
-All docker-compose.yml files, are modified and I removed all personal information
+To use just change the settings in the .env files located in each directory then simply use ``docker compose up -d`` to deploy
